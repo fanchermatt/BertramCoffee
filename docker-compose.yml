@@ -1,0 +1,44 @@
+services:
+  web:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    networks:
+      - network
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    depends_on:
+      - mysql_db
+    env_file:
+      - .env
+
+  node:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    networks:
+      - network
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    depends_on:
+      - mysql_db
+    env_file:
+      - .env
+
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3307:${DB_PORT}
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - network
+    env_file:
+      - .env
+
+networks:
+  network:
+    driver: bridge
