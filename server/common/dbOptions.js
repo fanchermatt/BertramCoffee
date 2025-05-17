@@ -3,4 +3,5 @@ module.exports = {
   seederStorage: "sequelize",
   seederStorageTableName: "sequelize_seeders",
   migrationStorageTableName: "sequelize_migrations",
+  logging: false,
 };

@@ -1,7 +1,8 @@
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
-  const employee = sequelize.define(
-    "employees",
+  const employee_drinks = sequelize.define(
+    "employee_drinks",
     {
       id: {
         primaryKey: true,
@@ -10,13 +11,25 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: false,
       },
-      name: {
-        type: DataTypes.STRING,
+      drink_id: {
+        type: DataTypes.UUID,
+        references: {
+          model: "Drinks",
+          key: "id",
+        },
         allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
-      debtOwed: {
-        type: DataTypes.DECIMAL(6, 2),
+      employee_id: {
+        type: DataTypes.UUID,
+        references: {
+          model: "Employees",
+          key: "id",
+        },
         allowNull: false,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -29,14 +42,5 @@ module.exports = (sequelize, DataTypes) => {
     },
     { paranoid: true, freezeTableName: true }
   );
-
-  // employee.associate = function (models) {
-  //   //for now we will only have one relationship
-  //   employee.hasOne(models.employee_drinks, {
-  //     foreignKey: "employee_id",
-  //     onDelete: "CASCADE",
-  //     onUpdate: "CASCADE",
-  //   });
-  // };
-  return employee;
+  return employee_drinks;
 };

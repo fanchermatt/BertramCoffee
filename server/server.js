@@ -12,9 +12,9 @@ const { sequelize: dbConnection } = require("./models");
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello World" });
-});
+//import routes
+const employeeRoutes = require("./routes/employeeRoutes");
+app.use("/api/employees", employeeRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
