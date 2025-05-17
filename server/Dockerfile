@@ -14,5 +14,5 @@ COPY . .
 # Expose port 3001
 EXPOSE 3001:3001
 
-# Start the React app
-CMD ["npm", "start"]
+# Start the server
+CMD ["npm", "run", "bootstrap-server"]
