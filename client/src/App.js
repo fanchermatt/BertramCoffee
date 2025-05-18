@@ -1,36 +1,17 @@
-import { useEffect } from "react";
-
+import AppLayout from "./components/layout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Employee from "./components/employee";
+import Home from "./components/home";
 const App = () => {
-  //on load, fetch the data from the server
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3001/api/employees/all",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>Hello World</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path='/employee' element={<Employee />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
