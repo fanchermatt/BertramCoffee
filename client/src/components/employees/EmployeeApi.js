@@ -1,11 +1,4 @@
-const API_BASE = "http://localhost:3001/api/";
-const headers = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
+import { API_BASE, headers } from "../common/constants";
 
 const getEmployees = async () => {
   const res = await fetch(API_BASE + "employees/all", {
