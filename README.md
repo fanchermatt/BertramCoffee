@@ -1,6 +1,6 @@
 # Bertram Coffee
 
-This project is intended to solve Bertram Labs growing issue getting **that** employee to pay their fair share. It also serves as a convenient method to let the new guy know that the coffee isn't being charged to a company card, and he will need to step up and pay eventually.
+This project is intended to solve Bertram Labs growing issue getting the new employee to pay their fair share. 
 
 It has been built in a way that would serve as a base towards a future end goal, provided the company had unlimited budget and time for superfluous office politics and caffiene needs. More information can be found below in the Long Term section.
 
