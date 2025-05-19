@@ -1,33 +1,40 @@
 const { body, param, validationResult } = require("express-validator");
 
-// Middleware for getting all employees
-const getAllEmployeesMiddleware = (req, res, next) => {
-  next();
-};
+const getAllEmployeesMiddleware = [
+  (req, res, next) => {
+    next();
+  },
+];
 
-// Middleware for getting an employee by ID
-const getEmployeeByIdMiddleware = (req, res, next) => {
-  // Add logic here
-  next();
-};
+const getEmployeeByIdMiddleware = [
+  (req, res, next) => {
+    next();
+  },
+];
 
-// Middleware for creating an employee
-const createEmployeeMiddleware = (req, res, next) => {
-  // Add logic here
-  next();
-};
+const createEmployeeMiddleware = [
+  (req, res, next) => {
+    next();
+  },
+];
 
-// Middleware for updating an employee
-const updateEmployeeMiddleware = (req, res, next) => {
-  // Add logic here
-  next();
-};
+const updateEmployeeMiddleware = [
+  (req, res, next) => {
+    next();
+  },
+];
 
-// Middleware for deleting an employee
-const deleteEmployeeMiddleware = (req, res, next) => {
-  // Add logic here
-  next();
-};
+const deleteEmployeeMiddleware = [
+  param("id").isUUID().withMessage("Invalid ID"),
+  (req, res, next) => {
+    const errors = validationResult(req).array();
+    const errorString = errors.map((e) => e.msg).join(", ");
+    if (errors.length > 0) {
+      return res.status(400).json({ success: false, message: errorString });
+    }
+    next();
+  },
+];
 
 module.exports = {
   getAllEmployeesMiddleware,

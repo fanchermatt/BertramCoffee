@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      debtOwed: {
+      balance: {
         type: Sequelize.DECIMAL(6, 2),
       },
       createdAt: {

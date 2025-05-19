@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  const employee_drinks = sequelize.define(
+  const employee_drink = sequelize.define(
     "employee_drinks",
     {
       id: {
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: false,
       },
-      drink_id: {
+      drinkId: {
         type: DataTypes.UUID,
         references: {
           model: "Drinks",
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
-      employee_id: {
+      employeeId: {
         type: DataTypes.UUID,
         references: {
           model: "Employees",
@@ -42,5 +42,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     { paranoid: true, freezeTableName: true }
   );
-  return employee_drinks;
+
+  employee_drink.associate = function (models) {
+    employee_drink.belongsTo(models.drinks, {
+      as: "drinks",
+      foreignKey: "drinkId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+    employee_drink.belongsTo(models.employees, {
+      as: "employees",
+      foreignKey: "employeeId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
+
+  return employee_drink;
 };

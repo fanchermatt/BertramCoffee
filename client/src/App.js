@@ -1,7 +1,7 @@
-import AppLayout from "./components/layout";
+import AppLayout from "./components/layout/layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Employee from "./components/employee";
-import Home from "./components/home";
+import Employee from "./components/employees/employees";
+import Home from "./components/home/home";
 const App = () => {
   return (
     <BrowserRouter>

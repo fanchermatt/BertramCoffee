@@ -11,10 +11,12 @@ const AppLayout = () => {
     {
       key: "1",
       label: "Home",
+      link: "/",
     },
     {
       key: "2",
       label: "Employee",
+      link: "/employee",
     },
   ];
 
@@ -29,13 +31,24 @@ const AppLayout = () => {
     }
   };
 
+  // Set the selected key based on the current path for highlighting
+  const currentPath = window.location.pathname;
+  const selectedKey = items.find(
+    (item) => `${item.link.toLowerCase()}` === currentPath
+  )?.key;
+  if (selectedKey) {
+    items.forEach((item) => {
+      item.selected = item.key === selectedKey;
+    });
+  }
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
         <Menu
           theme='dark'
           mode='inline'
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[selectedKey]}
           items={items}
           style={{ marginTop: ".5rem" }}
           onClick={handleMenuClick}
@@ -51,13 +64,11 @@ const AppLayout = () => {
         </Header>
         <Content style={{ margin: "1rem" }}>
           <div style={{ padding: "1.5rem", background: "#fff" }}>
-            {/* This is where the main content will be rendered */}
-            <h1>Welcome to Bertram Coffee Labs</h1>
             <Outlet />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          ©{new Date().getFullYear()} Bertram Coffee
+          {new Date().getFullYear()} Bertram Labs Coffee Experiment
         </Footer>
       </Layout>
     </Layout>

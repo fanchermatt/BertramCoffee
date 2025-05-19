@@ -12,9 +12,21 @@ const { sequelize: dbConnection } = require("./models");
 app.use(cors());
 app.use(express.json());
 
+// Middleware to log API calls
+app.use((req, res, next) => {
+  const timestamp = new Date().toISOString();
+  const method = req.method;
+  const url = req.originalUrl;
+
+  console.log(`[${timestamp}] ${method} ${url}`);
+  next();
+});
+
 //import routes
 const employeeRoutes = require("./routes/employeeRoutes");
+const drinkRoutes = require("./routes/drinkRoutes");
 app.use("/api/employees", employeeRoutes);
+app.use("/api/drinks", drinkRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

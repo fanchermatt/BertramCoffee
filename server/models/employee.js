@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      debtOwed: {
+      balance: {
         type: DataTypes.DECIMAL(6, 2),
         allowNull: false,
       },
@@ -30,13 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     { paranoid: true, freezeTableName: true }
   );
 
-  // employee.associate = function (models) {
-  //   //for now we will only have one relationship
-  //   employee.hasOne(models.employee_drinks, {
-  //     foreignKey: "employee_id",
-  //     onDelete: "CASCADE",
-  //     onUpdate: "CASCADE",
-  //   });
-  // };
+  employee.associate = function (models) {
+    //for now we will only have one relationship, in the future we may have more
+    employee.hasOne(models.employee_drinks, {
+      as: "employee_drinks",
+      foreignKey: "employeeId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
   return employee;
 };

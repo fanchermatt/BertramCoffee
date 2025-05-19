@@ -29,5 +29,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     { paranoid: true, freezeTableName: true }
   );
+
+  drink.associate = function (models) {
+    drink.hasOne(models.employee_drinks, {
+      as: "employee_drinks",
+      foreignKey: "drinkId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
   return drink;
 };
