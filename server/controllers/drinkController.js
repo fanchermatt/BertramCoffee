@@ -1,6 +1,6 @@
 const models = require("../models");
 const Drink = models.drinks;
-const { trimToTwoDecimalPlaces } = require("../common/utils");
+const { trimToTwoDecimalPlaces } = require("../utils/utils");
 
 // Update a drink by ID
 const updateDrink = async (req, res) => {
@@ -16,6 +16,7 @@ const updateDrink = async (req, res) => {
     //trim req.body.cost to 2 decimal places
     if (req.body.cost) {
       req.body.cost = trimToTwoDecimalPlaces(req.body.cost);
+      console.log("Trimmed cost:", req.body.cost);
     }
     await updatedDrink.update(req.body);
     // Assuming you want to return the updated drink

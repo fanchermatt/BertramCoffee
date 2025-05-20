@@ -25,8 +25,11 @@ app.use((req, res, next) => {
 //import routes
 const employeeRoutes = require("./routes/employeeRoutes");
 const drinkRoutes = require("./routes/drinkRoutes");
+const dayRoutes = require("./routes/dayRoutes");
+
 app.use("/api/employees", employeeRoutes);
 app.use("/api/drinks", drinkRoutes);
+app.use("/api/days", dayRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

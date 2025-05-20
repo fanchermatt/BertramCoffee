@@ -2,24 +2,16 @@ const models = require("../models");
 const Employee = models.employees;
 const Drink = models.drinks;
 const EmployeeDrink = models.employee_drinks;
-const { trimToTwoDecimalPlaces } = require("../common/utils");
+
+const { trimToTwoDecimalPlaces, drinkIncludes } = require("../utils/utils");
 
 const getAllEmployees = async (req, res) => {
   try {
-    const employees = await Employee.findAll({
-      include: [
-        {
-          model: EmployeeDrink,
-          as: "employee_drinks",
-          include: [
-            {
-              model: Drink,
-              as: "drinks",
-              attributes: ["id", "name", "cost"],
-            },
-          ],
-        },
-      ],
+    let employees = await Employee.findAll(drinkIncludes);
+
+    //sort them by balance to return
+    employees = employees.sort((a, b) => {
+      return a.balance - b.balance;
     });
 
     res.json(employees);
@@ -66,24 +58,10 @@ const createEmployee = async (req, res, next) => {
       drinkId: drink.dataValues.id,
     });
 
-    console.log(employee_drink);
-    console.log(drink);
-
-    const returnEmployee = await Employee.findByPk(employee.dataValues.id, {
-      include: [
-        {
-          model: EmployeeDrink,
-          as: "employee_drinks",
-          include: [
-            {
-              model: Drink,
-              as: "drinks",
-              attributes: ["id", "name", "cost"],
-            },
-          ],
-        },
-      ],
-    });
+    const returnEmployee = await Employee.findByPk(
+      employee.dataValues.id,
+      drinkIncludes
+    );
 
     res.status(201).json(returnEmployee);
   } catch (err) {

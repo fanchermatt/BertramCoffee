@@ -9,15 +9,16 @@ import {
   updateEmployee,
   createNewEmployee,
 } from "./EmployeeApi"; // Adjust the import path as necessary
-import { Button } from "antd";
+import { Button, message } from "antd";
 
-const Employee = () => {
-  const [employees, setEmployees] = useState([]);
+const Employee = ({ employees, setEmployees, dayAdvanced, setDayAdvanced }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const fetchEmployees = async () => {
     try {
@@ -45,8 +46,10 @@ const Employee = () => {
     try {
       await deleteEmployee(employee.id);
       setEmployees((prev) => prev.filter((emp) => emp.id !== employee.id));
+      messageApi.success("Employee deleted successfully");
     } catch (err) {
       setError(err);
+      messageApi.error("Failed to delete employee");
     }
   };
 
@@ -66,8 +69,10 @@ const Employee = () => {
             : emp
         )
       );
+      messageApi.success("Drink updated successfully");
     } catch (err) {
       setError(err);
+      messageApi.error("Failed to update drink");
     }
   };
   const saveEmployee = async (id, employeeData) => {
@@ -78,8 +83,10 @@ const Employee = () => {
           emp.id === id ? { ...emp, ...updatedEmployee } : emp
         )
       );
+      messageApi.success("Employee updated successfully");
     } catch (err) {
       setError(err);
+      messageApi.error("Failed to update employee");
     }
   };
 
@@ -87,10 +94,15 @@ const Employee = () => {
     try {
       const newEmployee = await createNewEmployee(employeeData);
 
-      console.log("newEmployee", newEmployee);
-      setEmployees((prev) => [...prev, newEmployee]);
+      setEmployees((prev) =>
+        [...prev, newEmployee].sort((a, b) => a.balance - b.balance)
+      );
+
+      messageApi.success("Employee created successfully");
+      setCreateModalVisible(false);
     } catch (err) {
       setError(err);
+      messageApi.error("Failed to create employee");
     }
   };
 
@@ -98,7 +110,11 @@ const Employee = () => {
     if (loading) {
       fetchEmployees();
     }
-  }, [loading]);
+    if (dayAdvanced) {
+      fetchEmployees();
+      setDayAdvanced(false);
+    }
+  });
 
   return (
     <div>
@@ -111,6 +127,7 @@ const Employee = () => {
             <p>No employees found.</p>
           )}
         </div>
+        {contextHolder}
         <div
           style={{
             display: "flex",
@@ -133,7 +150,6 @@ const Employee = () => {
           visible={modalVisible}
           employee={selectedEmployee}
           onCancel={onCancel}
-          onRefresh={fetchEmployees}
           saveDrink={saveDrink}
           saveEmployee={saveEmployee}
         />

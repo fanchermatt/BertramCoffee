@@ -1,6 +1,6 @@
 import AppLayout from "./components/layout/layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Employee from "./components/employees/employees";
+// import Employee from "./components/employees/employees";
 import Home from "./components/home/home";
 const App = () => {
   return (
@@ -8,7 +8,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path='/employee' element={<Employee />} />
         </Route>
       </Routes>
     </BrowserRouter>

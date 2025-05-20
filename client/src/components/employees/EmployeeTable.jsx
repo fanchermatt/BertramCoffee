@@ -1,4 +1,5 @@
 import { Table, Button, Space, Popconfirm } from "antd";
+import { trimToTwoDecimalPlaces } from "../common/utils";
 
 const EmployeeTable = ({ data, onEdit, onDelete }) => {
   const columns = [
@@ -21,6 +22,11 @@ const EmployeeTable = ({ data, onEdit, onDelete }) => {
       dataIndex: (row) => row.employee_drinks?.drinks?.cost,
       key: "drinkCost",
       render: (text, row) => {
+        if (row.employee_drinks?.drinks?.cost) {
+          row.employee_drinks.drinks.cost = trimToTwoDecimalPlaces(
+            row.employee_drinks.drinks.cost
+          );
+        }
         return <span>${row.employee_drinks?.drinks?.cost}</span>;
       },
     },
@@ -29,8 +35,19 @@ const EmployeeTable = ({ data, onEdit, onDelete }) => {
       dataIndex: "balance",
       key: "balance",
       render: (text, row) => {
+        if (row.balance) {
+          row.balance = trimToTwoDecimalPlaces(row.balance);
+        }
         const color =
           row.balance > 0 ? "green" : row.balance < 0 ? "red" : "grey";
+
+        if (row.balance < 0) {
+          return (
+            <span style={{ color: color }}>
+              -${Math.abs(row.balance).toFixed(2)}
+            </span>
+          );
+        }
         return <span style={{ color: color }}>${row.balance}</span>;
       },
     },

@@ -1,0 +1,38 @@
+const getMessage = (name) => {
+  const messages = [
+    `${name}, is the big winner today, everybody thanks you for your significant contributions to the cause!`,
+    `Everybody. ${name} has generously volunteered to pay today! Please thank ${name} for their generosity!`,
+    `Caffiene is on ${name} today! Productivity this afternoon is forecast to be at an all time high!`,
+    `${name}... it's about time you paid for the drinks!`,
+    `It is ${name}'s turn to pay today, hopefully they remember to bring their wallet!`,
+  ];
+  const randomIndex = Math.floor(Math.random() * messages.length);
+  return messages[randomIndex];
+};
+
+const getPayerLogic = (employees) => {
+  //sort employees by balance, if there are two employees with the same balance, sort by drink cost
+  employees.sort((a, b) => {
+    //rules for if two employees have the same balance
+    if (a.balance === b.balance) {
+      //if two employees have the same balance AND the same drink cost, we sort randomly to be fair
+      if (a.employee_drinks.drinks.cost === b.employee_drinks.drinks.cost) {
+        return Math.random() - 0.5;
+      }
+      //if the drinks are different cost, we sort by drink cost descending
+      if (a.employee_drinks.drinks.cost > b.employee_drinks.drinks.cost) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+    return a.balance - b.balance;
+  });
+
+  return employees[0];
+};
+
+module.exports = {
+  getMessage,
+  getPayerLogic,
+};
