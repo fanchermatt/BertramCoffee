@@ -21,9 +21,9 @@ This project can be started locally with two different methods.
 1. Ensure Docker Engine is running
 2. Open the integrated terminal of your choice. Navigate to your desired directory to host the repository and then run the following commands in order.
 3. `git clone https://github.com/fanchermatt/BertramCoffee`
-4. `cd BetramCoffee`
+4. `cd BertramCoffee`
 5. `mv .env.docker .env`
-6. `docker-compose up -d`
+6. `docker compose up -d`
 
 Once all containers are up and running (Note the node server may restart a few times while the mysql service is spinning up), you will be able to view the application in your browser at [localhost:3000](http://localhost:3000).
 
@@ -42,7 +42,7 @@ Once all containers are up and running (Note the node server may restart a few t
 1. Ensure MySQL is running
 2. Open the integrated terminal of your choice. Navigate to your desired directory to host the respoitory and then run the following commands in order.
 3. `git clone https://github.com/fanchermatt/BertramCoffee`
-4. `cd BetramCoffee`
+4. `cd BertramCoffee`
 5. Open the .env.local file, and change the DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT variables to your MySQL instance. Save the file as ".env"
 
 #### Start the server
