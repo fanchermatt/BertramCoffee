@@ -10,7 +10,7 @@ module.exports = {
       employeeIds.push(uuidv4());
     }
     await queryInterface.bulkInsert(
-      "Employees",
+      "employees",
       [
         {
           id: employeeIds[0],
@@ -72,7 +72,7 @@ module.exports = {
     }
 
     await queryInterface.bulkInsert(
-      "Drinks",
+      "drinks",
       [
         {
           id: drinkIds[0],
@@ -128,7 +128,7 @@ module.exports = {
     );
 
     await queryInterface.bulkInsert(
-      "Employee_Drinks",
+      "employee_drinks",
       [
         {
           id: uuidv4(),
@@ -186,7 +186,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete(
-      "Employees",
+      "employees",
       {
         name: [
           "Bob Whiton",
@@ -201,7 +201,7 @@ module.exports = {
       {}
     );
     await queryInterface.bulkDelete(
-      "Drinks",
+      "drinks",
       {
         name: [
           "Cappuccino",
