@@ -1,6 +1,6 @@
 # Bertram Coffee
 
-This project is intended to solve Bertram Labs growing issue getting the new employee to pay their fair share. 
+This project is intended to solve Bertram Labs growing issue getting the new employee to pay their fair share.
 
 It has been built in a way that would serve as a base towards a future end goal, provided the company had unlimited budget and time for superfluous office politics and caffiene needs. More information can be found below in the Long Term section.
 
@@ -43,7 +43,8 @@ Once all containers are up and running (Note the node server may restart a few t
 2. Open the integrated terminal of your choice. Navigate to your desired directory to host the respoitory and then run the following commands in order.
 3. `git clone https://github.com/fanchermatt/BertramCoffee`
 4. `cd BertramCoffee`
-5. Open the .env.local file, and change the DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT variables to your MySQL instance. Save the file as ".env"
+5. Open the .env.local file, and change the DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT variables to your MySQL instance
+6. `mv .env.local .env`
 
 #### Start the server
 
@@ -51,13 +52,21 @@ Once all containers are up and running (Note the node server may restart a few t
 2. `cd server`
 3. `npm run bootstrap-server`
 
+When you see the messages below, the server has succesfully started.
+
+"Server listening on port 3001
+
+Database connection has been established successfully"
+
 #### Start the Client
+
+Open a **seperate** terminal to start the client, both client and server will need to be running at once.
 
 1. Open the integrated terminal of your choice. Navigate to the root of the git repository and run the following commands in order
 2. `cd client`
 3. `npm run bootstrap-client`
 
-Once both terminals are up and running, you will be able to view the application in your browser at [localhost:3000](http://localhost:3000).
+Once you see the "Compiled successfully!" message, you will be able to view the application in your browser at [localhost:3000](http://localhost:3000).
 
 # Assumptions
 
@@ -86,7 +95,7 @@ After the business logic has processed, a notification will be sent out to all u
 
 1. Authentication - Ideally this would be run through something employee's use regularly (Ms Account, Azure AD, etc.). This depends on what is utilized for the company commonly already, but I can imagine placing the system behind the company internal firewall and utilizing microsoft accounts.
 
-2. Authorization - A small set of user roles would be necessary including Admin, Drink Admin, User, etc. We would simply add a roles table and junction table to join them to users and then write the logic on the front and back end to allow/disallow accordingly. 
+2. Authorization - A small set of user roles would be necessary including Admin, Drink Admin, User, etc. We would simply add a roles table and junction table to join them to users and then write the logic on the front and back end to allow/disallow accordingly.
 
 3. Preference management - Employee's will need to be able to set up a list of "favorite" drinks for easy access when placing orders. The "employee_drink" link table would be repurposed from it's current implementation to have a one-to-many relationship, and add a size column if the shop offers sizing.
 
