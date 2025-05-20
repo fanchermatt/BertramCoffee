@@ -66,7 +66,7 @@ For the sake of getting this completed in the given time frame, I have made some
 1. Whoever has the largest debt tally is the payer that day. If there is a tie, the person with the most expensive drink order will pay. (this one stays, no matter what as it is the root assumption)
 2. There are no drink sizes available. This isn't some chain we're discussing, coffee drinks have set ratio's of milk to coffee and that is how it is.
 3. Everybody in office is a creature of habit, and does not deviate from their coffee order. No iced in the summmer and hot in the winter stuff here, you get what you get.
-4. Everybody is in office everyday. We could set up schedule's and add a column to the employee table, but this wouldn't serve a purpose in the long term solution anyways, so I omitted it here.
+4. Everybody is in office everyday. I could set up schedule's and add a column to the employee table, but this wouldn't serve a purpose in the long term solution anyways, so I omitted it here.
 
 # Long Term Solution
 
