@@ -19,6 +19,7 @@ const Home = () => {
       }
     } catch (error) {
       messageApi.error("Failed to fetch payer");
+      setPayer("An error occurred while fetching the payer");
     } finally {
       setLoading(false);
     }
